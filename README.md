@@ -1,5 +1,7 @@
 # emotion-styled-utils
 
+[![NPM module](https://badge.fury.io/js/emotion-styled-utils.svg)](https://badge.fury.io/js/emotion-styled-utils)
+
 Styling utilities for use with [emotion](https://emotion.sh/).
 
 * Theme management utils, for use with [emotion-theming](https://emotion.sh/docs/theming).
@@ -15,13 +17,14 @@ npm install emotion-styled-utils
 
 ## Usage
 
-**Using themes and font-loading:**
+**Using reset styles, themes and font-loading:**
 
 ```js
 const React = require('react')
 const styled = require('@emotion/styled')
-import { ThemeProvider } from 'emotion-theming'
-const { loadFonts, addTheme, getTheme } = require('emotion-styled-utils')
+const { Global } = require('@emotion/core')
+const { ThemeProvider } = require('emotion-theming')
+const { loadFonts, addTheme, getTheme, resetStyles } = require('emotion-styled-utils')
 
 const CustomDiv = styled.div`
   ${({ theme }) => theme.font('body')};
@@ -54,6 +57,7 @@ export default class MyApp extends React.Component {
   render () {
     return (
       <ThemProvider theme={getTheme('default')}>
+        <Global styles={resetStyles} />
         <CustomDiv>hello world!</CustomDiv>
       </ThemeProvider>
     )
