@@ -1,3 +1,5 @@
+import { font } from './fonts'
+
 /**
  * Generate flexbox CSS.
  *
@@ -86,7 +88,6 @@ export const boxShadow = ({ color }) => `
  * @return {String}
  */
 export const buttonStyles = ({
-  theme,
   disabled,
   buttonDisabledBgColor,
   buttonDisabledTextColor,
@@ -98,9 +99,10 @@ export const buttonStyles = ({
   buttonHoverTextColor,
   buttonHoverBorderColor,
   buttonShadowColor,
+  extraStyles = '',
 }) => `
   ${smoothTransitions()};
-  ${theme.font('body', 'bold')};
+  ${font('body', 'bold')};
   cursor: pointer;
   border: 1px solid ${(disabled ? buttonDisabledBorderColor : buttonBorderColor)};
   background-color: ${(disabled ? buttonDisabledBgColor : buttonBgColor)};
@@ -116,4 +118,5 @@ export const buttonStyles = ({
       ${boxShadow({ color: buttonShadowColor })};
     }
   `)}
+  ${extraStyles}
 `

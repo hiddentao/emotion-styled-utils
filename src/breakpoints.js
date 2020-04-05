@@ -1,6 +1,4 @@
-let breakpoints
-
-const getSize = (bp, type) => {
+const getSize = (breakpoints, bp, type) => {
   const size = Object.keys(breakpoints[type]).find(k => k === bp)
 
   if (!size) {
@@ -14,29 +12,23 @@ const getSize = (bp, type) => {
  * Responsive layout utilities
  * @type {Object}
  */
-export const media = {
+export class Media {
   /**
-   * Maximum content width as a CSS dimension.
-   *
-   * @type {String}
-   * @name media.maxWidth
-   */
-  maxWidth: breakpoints.width.desktop,
-  /**
-   * Set breakpoints.
+   * Constructor
    * @param {Object} def Breakpoint config.
    */
-  setBreakpoints: def => {
-    breakpoints = def
-  },
+  constructor (def) {
+    this.breakpoints = def
+  }
+
   /**
    * Generate media query.
    * @param  {Object} m Parameters
    * @return {String}
    * @name media.when
    */
-  when: m => {
-    if (!breakpoints) {
+  when (m) {
+    if (!this.breakpoints) {
       throw new Error('Breakpoints not yet set')
     }
 
@@ -51,9 +43,9 @@ export const media = {
         throw new Error(`Bad suffix: ${k}`)
       }
 
-      return `${k.substr(0, 3)}-${type}: ${getSize(v, type)}`
+      return `${k.substr(0, 3)}-${type}: ${getSize(this.breakpoints, v, type)}`
     })
 
     return `@media (${vals.join(') and (')})`
-  },
+  }
 }

@@ -12,13 +12,13 @@ Styling utilities for use with [emotion](https://emotion.sh/).
 ## Installation
 
 ```shell
-npm install emotion-styled-utils
+npm install emotion-styled-utils @emotion/core
 ```
 
 It is recommended that you also install the following packages:
 
 ```shell
-npm install @emotion/core @emotion/styled emotion-theming
+npm install @emotion/styled emotion-theming
 ```
 
 ## Usage
@@ -28,18 +28,19 @@ npm install @emotion/core @emotion/styled emotion-theming
 ```js
 const React = require('react')
 const styled = require('@emotion/styled')
-const { Global } = require('@emotion/core')
+const { Global, css } = require('@emotion/core')
 const { ThemeProvider } = require('emotion-theming')
-const { loadFonts, addTheme, getTheme, resetStyles } = require('emotion-styled-utils')
+const { loadFonts, Themes, resetStyles, font } = require('emotion-styled-utils')
 
-const CustomDiv = styled.div`
-  ${({ theme }) => theme.font('body')};
-  color: ${({ theme  }) => theme.bodyTextColor};
-`
-
-addTheme('default', {
+// setup themes manager
+const themes = new Themes({
   bodyTextColor: '#000'
 })
+
+const CustomDiv = styled.div`
+  ${({ theme }) => font('body')};
+  color: ${({ theme  }) => theme.bodyTextColor};
+`
 
 export default class MyApp extends React.Component {
   componentDidMount () {
@@ -62,8 +63,8 @@ export default class MyApp extends React.Component {
 
   render () {
     return (
-      <ThemProvider theme={getTheme('default')}>
-        <Global styles={resetStyles} />
+      <ThemProvider theme={themes.get('default')}>
+        <Global styles={css(resetStyles)} />
         <CustomDiv>hello world!</CustomDiv>
       </ThemeProvider>
     )
@@ -101,10 +102,10 @@ See `fragments.js` for full list of available style fragments.
 const React = require('react')
 const styled = require('@emotion/styled')
 import { ThemeProvider } from 'emotion-theming'
-const { media } = require('emotion-styled-utils')
+const { Themes } = require('emotion-styled-utils')
 
-// NOTE: this sets the breakpoints globally
-media.setBreakpoints({
+// setup themes manager with breakpoints
+const themes = new Themes({}, {
   width: {
     mobile: '950px',
     desktop: '1280px',
@@ -117,7 +118,7 @@ media.setBreakpoints({
 const HideOnMobileDiv = styled.div`
   display: none;
 
-  ${media.when({ minW: 'mobile' })} {
+  ${({ theme }) => theme.media.when({ minW: 'mobile' })} {
     display: block;
   }
 `
@@ -125,7 +126,7 @@ const HideOnMobileDiv = styled.div`
 const HideOnDesktopDiv = styled.div`
   display: block;
 
-  ${media.when({ maxW: 'mobile' })} {
+  ${({ theme }) => theme.media.when({ maxW: 'mobile' })} {
     display: none;
   }
 `

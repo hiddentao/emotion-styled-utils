@@ -1,10 +1,8 @@
-import { css } from '@emotion/core'
-
 /**
  * Reset stylesheet.
  * @type {EmotionCss}
  */
-export const resetStyles = css`
+export const resetStyles = `
   /* http://meyerweb.com/eric/tools/css/reset/
      v2.0 | 20110126
      License: none (public domain)

@@ -1,38 +1,44 @@
-import { font } from './fonts'
+import { Media } from './breakpoints'
 
-const themes = {}
-
-
-/**
- * Add a theme.
- * @param  {String} name Theme name.
- * @param  {Object} def Theme definition.
- * @return {Object} Theme object.
- */
-export const addTheme = (name, def) => {
-  themes[name] = def
-}
-
-
-/**
- * Get a theme.
- * @param  {Number} [s] Theme number (default is latest version theme).
- * @return {Object} Theme object.
- */
-export const getTheme = (s = themes.length - 1) => {
-  if (!themes[s]) {
-    s = themes.length - 1
+export class Themes {
+  /**
+   * Constructor
+   * @param  {Object} def Default theme definition.
+   */
+  constructor (def, breakpoints) {
+    this.themes = {
+      default: def
+    }
+    this.media = new Media(breakpoints)
   }
 
-  return {
-    ...themes[s],
-    font,
+  /**
+   * Add a theme.
+   * @param  {String} name Theme name.
+   * @param  {Object} def Theme definition.
+   */
+  add (name, def) {
+    this.themes[name] = def
+  }
+
+  /**
+   * Get a theme.
+   * @param  {String} name Theme name.
+   * @return {Object} Theme definition (or default theme definition it not found)
+   */
+  get (name) {
+    return {
+      ...(this.themes[name] || this.themes.default),
+      media: this.media,
+    }
+  }
+
+  /**
+   * Get names of themes.
+   * @return {Array}
+   */
+  getNames () {
+    return Object.keys(this.themes)
   }
 }
 
-
-/**
- * Get names of themes.
- * @return {Array}
- */
-export const getThemeNames = () => Object.keys(themes)
