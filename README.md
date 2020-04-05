@@ -15,6 +15,12 @@ Styling utilities for use with [emotion](https://emotion.sh/).
 npm install emotion-styled-utils
 ```
 
+It is recommended that you also install the following packages:
+
+```shell
+npm install @emotion/core @emotion/styled emotion-theming
+```
+
 ## Usage
 
 **Using reset styles, themes and font-loading:**
