@@ -43,24 +43,27 @@ export const childAnchors = ({
   hoverTextColor,
   hoverBgColor,
   borderColor,
-  borderType = 'bottom-border',
+  hoverBorderColor,
+  borderType = 'border-bottom',
   inHoverState,
   extraStyles,
 }) => `
   a {
     color: ${inHoverState ? hoverTextColor : textColor};
     background-color: ${inHoverState ? (hoverBgColor || textColor) : bgColor};
-    ${borderType}: 1px solid ${borderColor || textColor};
+    border-color: ${borderColor || textColor};
     &:visited, &:link {
       color: ${textColor};
       background-color: ${bgColor};
-      ${borderType}: 1px solid ${borderColor || textColor};
+      border-color: ${borderColor || textColor};
     }
     &:hover, &:active {
       color: ${hoverTextColor};
       background-color: ${hoverBgColor || textColor};
-      ${borderType}: 1px solid ${borderColor || textColor};
+      border-color: ${hoverBorderColor || textColor};
     }
+    ${borderType}-style: solid;
+    border-width: 1px;
     ${extraStyles}
   }
 `
