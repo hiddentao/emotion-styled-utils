@@ -42,23 +42,24 @@ export const childAnchors = ({
   bgColor = 'transparent',
   hoverTextColor,
   hoverBgColor,
-  borderBottomColor,
-  selected,
+  borderColor,
+  borderType = 'bottom-border',
+  inHoverState,
   extraStyles,
 }) => `
   a {
-    color: ${selected ? hoverTextColor : textColor};
-    background-color: ${selected ? (hoverBgColor || textColor) : bgColor};
-    border-bottom: 1px solid ${borderBottomColor || textColor};
+    color: ${inHoverState ? hoverTextColor : textColor};
+    background-color: ${inHoverState ? (hoverBgColor || textColor) : bgColor};
+    ${borderType}: 1px solid ${borderColor || textColor};
     &:visited, &:link {
       color: ${textColor};
       background-color: ${bgColor};
-      border-bottom: 1px solid ${borderBottomColor || textColor};
+      ${borderType}: 1px solid ${borderColor || textColor};
     }
     &:hover, &:active {
       color: ${hoverTextColor};
       background-color: ${hoverBgColor || textColor};
-      border-bottom: 1px solid ${borderBottomColor || textColor};
+      ${borderType}: 1px solid ${borderColor || textColor};
     }
     ${extraStyles}
   }
