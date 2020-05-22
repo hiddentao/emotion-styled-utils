@@ -72,8 +72,8 @@ export const childAnchors = ({
  * Generate CSS for smooth animations.
  * @return {String}
  */
-export const smoothTransitions = () => `
-  transition: all 0.3s linear
+export const smoothTransitions = ({ duration = '0.3s' } = {}) => `
+  transition: all ${duration} linear
 `
 
 /**
@@ -92,35 +92,32 @@ export const boxShadow = ({ color }) => `
  * @return {String}
  */
 export const buttonStyles = ({
-  disabled,
-  buttonDisabledBgColor,
-  buttonDisabledTextColor,
-  buttonDisabledBorderColor,
-  buttonBgColor,
-  buttonTextColor,
-  buttonBorderColor,
-  buttonHoverBgColor,
-  buttonHoverTextColor,
-  buttonHoverBorderColor,
-  buttonShadowColor,
-  extraStyles = '',
+  inDisabledState,
+  disabledBgColor,
+  disabledTextColor,
+  disabledBorderColor,
+  bgColor,
+  textColor,
+  borderColor,
+  hoverBgColor,
+  hoverTextColor,
+  hoverBorderColor,
+  shadowColor,
 }) => `
-  ${smoothTransitions()};
-  ${font('body', 'bold')};
+  test: ${shadowColor};
   cursor: pointer;
-  border: 1px solid ${(disabled ? buttonDisabledBorderColor : buttonBorderColor)};
-  background-color: ${(disabled ? buttonDisabledBgColor : buttonBgColor)};
-  color: ${(disabled ? buttonDisabledTextColor : buttonTextColor)};
-  padding: 1em 2em;
-  font-size: 1rem;
+  border-color: ${(inDisabledState ? disabledBorderColor : borderColor)};
+  background-color: ${(inDisabledState ? disabledBgColor : bgColor)};
+  color: ${(inDisabledState ? disabledTextColor : textColor)};
   outline: none;
-  ${(disabled ? '' : `
+  border-style: solid;
+  border-width: 1px;
+  ${(inDisabledState ? '' : `
     &:hover {
-      border-color: ${buttonHoverBorderColor};
-      background-color: ${buttonHoverBgColor};
-      color: ${buttonHoverTextColor};
-      ${boxShadow({ color: buttonShadowColor })};
+      border-color: ${hoverBorderColor};
+      background-color: ${hoverBgColor};
+      color: ${hoverTextColor};
+      ${boxShadow({ color: shadowColor })};
     }
   `)}
-  ${extraStyles}
 `
