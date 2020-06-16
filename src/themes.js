@@ -1,4 +1,5 @@
 import { Media } from './breakpoints'
+import { font } from './fonts'
 
 export class Themes {
   /**
@@ -30,6 +31,7 @@ export class Themes {
     return {
       ...(this.themes[name] || this.themes.default),
       media: this.media,
+      font,
     }
   }
 

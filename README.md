@@ -30,7 +30,7 @@ const React = require('react')
 const styled = require('@emotion/styled')
 const { Global, css } = require('@emotion/core')
 const { ThemeProvider } = require('emotion-theming')
-const { loadFonts, Themes, resetStyles, font } = require('emotion-styled-utils')
+const { loadFonts, Themes, resetStyles } = require('emotion-styled-utils')
 
 // setup themes manager
 const themes = new Themes({
@@ -38,7 +38,7 @@ const themes = new Themes({
 })
 
 const CustomDiv = styled.div`
-  ${({ theme }) => font('body')};
+  ${({ theme }) => theme.font('body')};
   color: ${({ theme  }) => theme.bodyTextColor};
 `
 

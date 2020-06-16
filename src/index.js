@@ -1,5 +1,5 @@
 export * from './breakpoints'
-export * from './fonts'
+export { loadFonts } from './fonts'
 export * from './fragments'
 export * from './reset'
 export * from './themes'
