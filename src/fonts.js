@@ -12,7 +12,7 @@ const DEFAULT_FONT = {
   }
 }
 
-const loadedFonts = {}
+const userFonts = {}
 
 /**
  * Load fonts.
@@ -23,6 +23,8 @@ const loadedFonts = {}
  */
 export const loadFonts = (cfg, doc) => {
   const ret = Promise.all(Object.keys(cfg).map(id => {
+    userFonts[id] = cfg[id]
+
     const { name } = cfg[id]
 
     console.log(`Waiting for font: ${name}`)
@@ -31,8 +33,6 @@ export const loadFonts = (cfg, doc) => {
 
     return obs.load().then(() => {
       console.log(`Font loaded: ${name}`)
-
-      loadedFonts[id] = cfg[id]
     }, err => {
       console.warn(`Error observing loading of font ${name}: ${err.message}`)
     })
@@ -57,7 +57,7 @@ export const loadFonts = (cfg, doc) => {
 }
 
 export const font = (id, weight = 'regular', style = 'normal') => {
-  const f = loadedFonts[id] || DEFAULT_FONT
+  const f = userFonts[id] || DEFAULT_FONT
 
   return `
     font-family: '${f.name}', sans-serif;
