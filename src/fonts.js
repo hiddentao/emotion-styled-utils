@@ -60,7 +60,7 @@ export const font = (id, weight = 'regular', style = 'normal') => {
   const f = userFonts[id] || DEFAULT_FONT
 
   return `
-    font-family: '${f.name}', sans-serif;
+    font-family: '${f.name}', Arial, sans-serif;
     font-weight: ${f.weights[weight]};
     font-style: ${style};
   `
