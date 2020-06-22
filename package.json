@@ -1,6 +1,6 @@
 {
   "name": "emotion-styled-utils",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "Utilities for working with emotion and styled components.",
   "scripts": {
     "clean": "rm -rf ./dist && mkdir ./dist",
