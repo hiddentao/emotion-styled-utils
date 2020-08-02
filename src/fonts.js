@@ -15,6 +15,22 @@ const DEFAULT_FONT = {
 const userFonts = {}
 
 /**
+ * Set fonts.
+ *
+ * Use this instead of `loadFonts()` when you want to load the fonts yourself.
+ *
+ * @param  {FontsConfig} cfg Configuration.
+ */
+export const setFonts = (cfg) => {
+  Object.keys(cfg).forEach(id => {
+    userFonts[id] = cfg[id]
+    const { name } = cfg[id]
+    console.log(`Setting font: ${name} as ${id}`)
+  })
+}
+
+
+/**
  * Load fonts.
  *
  * @param  {FontsConfig} cfg Configuration.
@@ -27,7 +43,7 @@ export const loadFonts = (cfg, doc) => {
 
     const { name } = cfg[id]
 
-    console.log(`Waiting for font: ${name}`)
+    console.log(`Loading font ${name} as ${id}`)
 
     const obs = new FontFaceObserver(name)
 
