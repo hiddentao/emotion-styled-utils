@@ -108,7 +108,6 @@ export const buttonStyles = ({
   hoverBorderColor,
   shadowColor,
 }) => `
-  test: ${shadowColor};
   cursor: pointer;
   border-color: ${(inDisabledState ? disabledBorderColor : borderColor)};
   background-color: ${(inDisabledState ? disabledBgColor : bgColor)};
